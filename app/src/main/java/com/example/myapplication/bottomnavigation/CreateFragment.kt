@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.example.myapplication.adapters.CarouselRVAdapter
+import com.example.myapplication.adapters.SelectedImagesAdapter
 import com.example.myapplication.R
 import android.content.res.Resources
 import android.util.Log
@@ -56,9 +56,9 @@ class CreateFragment : Fragment() {
             (getChildAt(0) as RecyclerView).overScrollMode =
                 RecyclerView.OVER_SCROLL_NEVER // Remove the scroll effect
         }
-        val adapter = CarouselRVAdapter(images)
+        val adapter = SelectedImagesAdapter(images)
         viewPager.adapter = adapter
-        adapter.setOnItemClickListener(object : CarouselRVAdapter.onItemClickListener {
+        adapter.setOnItemClickListener(object : SelectedImagesAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 println("you clicked $position")
 

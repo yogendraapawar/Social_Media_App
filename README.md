@@ -2,6 +2,11 @@
 # Social_Media_App
 A social media application made with Kotlin and Firebase Firestore.
 
+## Find application demo here
+https://github.com/yogendra131994/Social_Media_App/assets/87609565/d4d59a76-d9ae-427d-b9be-5a8ef6f89424
+
+
+
 - [x] User authentication
 - [x] Upload post
      - [ ] Post comment
@@ -11,9 +16,9 @@ A social media application made with Kotlin and Firebase Firestore.
 - [ ] Feed home page with the posts of users I follow (can be done in Home fragment)
 - [ ] Upload profile pic (can be done in Profile fragment)
 
-## Structure of project
+# Structure of project
 
-1. There are 2 activities
+## There are 2 activities
   - MainActivity.kt associated with [activity_main.xml](https://github.com/yogendra131994/Social_Media_App/blob/main/app/src/main/res/layout/activity_main.xml)
       - It is opened only after authentication to allow users access all the functionalities
         ![image](https://github.com/yogendra131994/Social_Media_App/assets/87609565/106baf59-0d6d-420b-8216-41a21258d9b3)

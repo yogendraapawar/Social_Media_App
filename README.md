@@ -24,6 +24,9 @@ A social media application made with Kotlin and Firebase Firestore.
 
 The MainActivity.kt uses bottom navigation. All the .kt files are within folder [bottomnavigation](https://github.com/yogendra131994/Social_Media_App/tree/main/app/src/main/java/com/example/myapplication/bottomnavigation) folder.
 
+![image](https://github.com/yogendra131994/Social_Media_App/assets/87609565/3e125c88-cf06-4381-8288-ca82f80ead74)
+
+
 > CreateFragment.kt associated with [fragment_create.xml](https://github.com/yogendra131994/Social_Media_App/blob/main/app/src/main/java/com/example/myapplication/bottomnavigation/CreateFragment.kt).
 > 
 > ExploreFragment.kt associated with [fragment_explore.xml](https://github.com/yogendra131994/Social_Media_App/blob/main/app/src/main/java/com/example/myapplication/bottomnavigation/ExploreFragment.kt)
@@ -34,7 +37,11 @@ The MainActivity.kt uses bottom navigation. All the .kt files are within folder 
 > 
 > SearchFragment.kt associated with [fragment_search.xml](https://github.com/yogendra131994/Social_Media_App/blob/main/app/src/main/java/com/example/myapplication/bottomnavigation/SearchFragment.kt)
 
+
 The Authentication.kt contains 3 fragments as following
+
+![image](https://github.com/yogendra131994/Social_Media_App/assets/87609565/851899a5-84d1-4357-99bd-26021018b4a2)
+
 > [fragment_sign_up.xml](https://github.com/yogendra131994/Social_Media_App/blob/main/app/src/main/res/layout/fragment_sign_up.xml)  handled by [SignUpFragment.kt](https://github.com/yogendra131994/Social_Media_App/blob/main/app/src/main/java/com/example/myapplication/SignUpFragment.kt)
 > 
 > [fragment_sign_in.xml](https://github.com/yogendra131994/Social_Media_App/blob/main/app/src/main/res/layout/fragment_sign_in.xml) handled by [SignInFragment.kt](https://github.com/yogendra131994/Social_Media_App/blob/main/app/src/main/java/com/example/myapplication/SignInFragment.kt)

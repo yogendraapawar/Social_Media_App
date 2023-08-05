@@ -2,6 +2,11 @@
 # Social_Media_App
 A social media application made with Kotlin and Firebase Firestore.
 
+# Vision
+> *To cover basic functionalities first*
+> 
+> *Later on add unique functionalities*
+
 ## Find application demo here
 https://github.com/yogendra131994/Social_Media_App/assets/87609565/d4d59a76-d9ae-427d-b9be-5a8ef6f89424
 

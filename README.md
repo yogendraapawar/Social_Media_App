@@ -1,5 +1,15 @@
+
 # Social_Media_App
 A social media application made with Kotlin and Firebase Firestore.
+
+- [x] User authentication
+- [x] Upload post
+     - [ ] Post comment
+     - [ ] Post like
+- [x] Follow functionality
+- [x] Search users
+- [ ] Feed home page with the posts of users I follow (can be done in Home fragment)
+- [ ] Upload profile pic (can be done in Profile fragment)
 
 ## Structure of project
 

@@ -106,29 +106,6 @@ class CreateFragment : Fragment() {
                         Log.w(TAG, "Error adding post", e)
                     }
 
-//                val query=db.collection("users").whereEqualTo("username", input)
-//                    .get()
-//                    .addOnSuccessListener { querySnapshot->
-//                        if(!querySnapshot.isEmpty){
-//                            val updates = hashMapOf<String, Any>(
-//                                "posts" to FieldValue.arrayUnion(post)
-//                            )
-//                            val document = querySnapshot.documents[0]
-    //                            document.reference.update(updates)
-//                                .addOnSuccessListener {
-//                                    Toast.makeText(context, "posted in user document", Toast.LENGTH_SHORT).show()
-//                                    val fragmentManager = requireActivity().supportFragmentManager
-//                                    fragmentManager.popBackStack()
-//                                    replaceFragment(HomeFragment())
-//
-//                                }
-//                                .addOnFailureListener{
-//                                    Toast.makeText(context, "failed update post in user doc ", Toast.LENGTH_SHORT).show()
-//                                }
-//                        }
-//
-//                    }
-
             }
 
 

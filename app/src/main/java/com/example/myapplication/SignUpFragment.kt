@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.os.Build.VERSION_CODES.N
 import android.os.Bundle
 import android.util.Log
@@ -50,22 +51,22 @@ class SignUpFragment : Fragment() {
             username = binding.usernameText.text.toString().trim()
             email = binding.emailText.text.toString().trim()
             password = binding.passwordText.text.toString().trim()
-            firstname  = binding.firstNameText.text.toString().trim()
-            lastname  = binding.lastNameText.text.toString().trim()
+            firstname = binding.firstNameText.text.toString().trim()
+            lastname = binding.lastNameText.text.toString().trim()
 
-            if (firstname.isEmpty()||lastname.isEmpty()||email.isEmpty() || username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            if (firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty()) {
+                context?.showShortToast("Please fill in all fields")
                 return@setOnClickListener
             }
-            if(!isEmail(email)){
-                Toast.makeText(context, "Enter valid email", Toast.LENGTH_SHORT).show()
+            if (!isEmail(email)) {
+                context?.showShortToast("Enter valid email")
                 return@setOnClickListener
             }
 
 
             val user = hashMapOf(
                 "firstname" to firstname,
-            "lastname" to lastname,
+                "lastname" to lastname,
                 "email" to email,
                 "password" to password,
                 "username" to username,
@@ -100,7 +101,7 @@ class SignUpFragment : Fragment() {
                 val exists = !querySnapshot.isEmpty
                 callback(exists)
                 if (exists) {
-                    Toast.makeText(context, "$key exists, use another $key", Toast.LENGTH_SHORT).show()
+                    context?.showShortToast("$key exists, use another $key")
                 }
             }
             .addOnFailureListener { e ->
@@ -114,7 +115,7 @@ class SignUpFragment : Fragment() {
             .add(user)
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                context?.showShortToast("Success")
                 replaceFragment(SignInFragment())
             }
             .addOnFailureListener { e ->
@@ -128,10 +129,15 @@ class SignUpFragment : Fragment() {
             .addToBackStack(null)
             .commit()
     }
+
     private fun isEmail(input: String): Boolean {
         for (i in input.indices) {
             if (input[i] == '@') return true
         }
         return false
+    }
+
+    private fun Context.showShortToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -1,11 +1,16 @@
 package com.example.myapplication.activities
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 import com.example.myapplication.bottomnavigation.CreateFragment
@@ -16,21 +21,22 @@ import com.example.myapplication.bottomnavigation.ExploreFragment
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
 class MainActivity : AppCompatActivity() {
     // Binding object to access views in layout
     private lateinit var binding: ActivityMainBinding
+
     // The bottom navigation view
     private lateinit var bottomNavigation: BottomNavigationView
 
     // Count to keep track of number of back button presses
-    private var prevBackStackSize =0
+    private var prevBackStackSize = 0
 
-    private var count=1
-    private val frag=CreateFragment()
+    private var count = 1
+    private val frag = CreateFragment()
 
-    private var backPressed=false
-    private val MAX_IMAGE_COUNT=5
+    private var backPressed = false
+    private val MAX_IMAGE_COUNT = 5
+    private val IMAGE_REQUEST_CODE = 2
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +68,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.createpost -> {
-                    pickImagesIntent()
+                    //pickImagesIntent()
+                    requestImagePermission()
 //                    replaceFragment(CreateFragment(), "createpost")
                     false
                 }
@@ -87,10 +94,10 @@ class MainActivity : AppCompatActivity() {
             val stackSize = supportFragmentManager.backStackEntryCount
 
             if (stackSize < prevBackStackSize) {
-                if (count==0) {
+                if (count == 0) {
                     finishAffinity()
                 }
-                backPressed=true
+                backPressed = true
                 // A fragment has been popped from the back stack
                 // Perform any desired actions or update UI accordingly
 
@@ -103,24 +110,35 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     finishAffinity()
                 }
-            }else if(stackSize>prevBackStackSize){
-                if(count<3){
+            } else if (stackSize > prevBackStackSize) {
+                if (count < 3) {
                     count++
                 }
             }
             prevBackStackSize = stackSize
         }
 
-
-
         // Add the callback to the back button dispatcher
-        onBackPressedDispatcher.addCallback(this,onBackPressedCallback)
-
-
-
-
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
+    private fun requestImagePermission() {
+        when {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED -> {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    IMAGE_REQUEST_CODE
+                )
+            }
+            else -> {
+                pickImagesIntent()
+            }
+        }
+    }
 
 
     private fun checkBottomNavIcon(currentFragment: Fragment?) {
@@ -132,31 +150,50 @@ class MainActivity : AppCompatActivity() {
         when (currentFragment) {
             is HomeFragment -> menu.findItem(R.id.home).isChecked = true
             is SearchFragment -> menu.findItem(R.id.search).isChecked = true
-            is ProfileFragment->menu.findItem(R.id.profile).isChecked = true
-            is ExploreFragment->menu.findItem(R.id.Explore).isChecked=true
-            is CreateFragment->menu.findItem(R.id.createpost).isChecked=true
+            is ProfileFragment -> menu.findItem(R.id.profile).isChecked = true
+            is ExploreFragment -> menu.findItem(R.id.Explore).isChecked = true
+            is CreateFragment -> menu.findItem(R.id.createpost).isChecked = true
             // Add more cases for other fragments
             // Use the menu item ID corresponding to each fragment's icon
         }
     }
 
-
-
-
     private fun pickImagesIntent() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-        intent.action = Intent.ACTION_GET_CONTENT
-        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+        val intent = Intent().apply {
+            type = "image/*"
+            putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            action = Intent.ACTION_GET_CONTENT
+            addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+        }
         resultLauncher.launch(intent)
+    }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            IMAGE_REQUEST_CODE -> {
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
+                    pickImagesIntent()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Please grant permission for picking image",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
 
 
-
     private var resultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 // There are no request codes
                 val data: Intent? = result.data
@@ -170,7 +207,7 @@ class MainActivity : AppCompatActivity() {
                         bundle.putInt("count", count)
                         for (i in 0 until count) {
                             val imageUri = data.clipData!!.getItemAt(i).uri
-                            bundle.putString("image$i", imageUri.toString() )
+                            bundle.putString("image$i", imageUri.toString())
                         }
 
                         frag.arguments = bundle
@@ -184,9 +221,9 @@ class MainActivity : AppCompatActivity() {
                             frag.arguments = bundle
                         }
                     }
-                   replaceFragment(frag,"createpost")
+                    replaceFragment(frag, "createpost")
                     val menu = bottomNavigation.menu
-                    menu.findItem(R.id.createpost).isChecked=true
+                    menu.findItem(R.id.createpost).isChecked = true
 
                 } else {
                     val current =
@@ -201,9 +238,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-
-    // Function to replace the current fragment with a new one
     // Function to replace the current fragment with a new one
     private fun replaceFragment(fragment: Fragment, name: String, onSuccess: (() -> Unit)? = null) {
         supportFragmentManager.beginTransaction()
@@ -217,9 +251,9 @@ class MainActivity : AppCompatActivity() {
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             //showing dialog and then closing the application..
-            if(count==0){
+            if (count == 0) {
                 finishAffinity()
-            }else{
+            } else {
                 supportFragmentManager.popBackStack()
 
             }
@@ -228,7 +262,3 @@ class MainActivity : AppCompatActivity() {
 
 
 }
-
-
-
-

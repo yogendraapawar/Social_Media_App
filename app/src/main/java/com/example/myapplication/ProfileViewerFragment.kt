@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,7 +43,7 @@ class ProfileViewerFragment : Fragment() {
         binding = FragmentProfileViewerBinding.inflate(inflater, container, false)
         val view = binding.root
         val pref = requireActivity().getSharedPreferences("LOG_IN", Context.MODE_PRIVATE)
-        myusername = pref.getString("emailOrUsername", "").toString()
+        myusername = pref.getString("emailOrUsername", null).toString()
         postList = ArrayList()
 
         recyclerView = binding.recyclerView.apply {
@@ -54,8 +53,8 @@ class ProfileViewerFragment : Fragment() {
         targetUsername = arguments?.getString(ARG_USERNAME).toString()
 
         fetchData()
-        val button=binding.followButton
-        button.setOnClickListener {
+        val followButton = binding.followButton
+        followButton.setOnClickListener {
             db.collection("users")
                 .whereEqualTo("username", myusername)
                 .get().addOnSuccessListener { querySnapshot ->
@@ -66,11 +65,11 @@ class ProfileViewerFragment : Fragment() {
                             val following = it.following ?: ArrayList()
                             if (!following.contains(targetUsername)) {
                                 following.add(targetUsername)
-                                button.hint="Following"
+                                followButton.hint = "Following"
 
-                            }else{
+                            } else {
                                 following.remove(targetUsername)
-                                button.hint="Follow"
+                                followButton.hint = "Follow"
                             }
 
                             val updates = hashMapOf<String, Any?>("following" to following)
@@ -81,7 +80,7 @@ class ProfileViewerFragment : Fragment() {
                                 }
                                 .addOnFailureListener {
                                     showToast("Failed to follow $targetUsername")
-                                    button.hint="Follow"
+                                    followButton.hint = "Follow"
                                 }
                         }
                     }
@@ -100,7 +99,7 @@ class ProfileViewerFragment : Fragment() {
                             if (!followers.contains(myusername)) {
                                 followers.add(myusername)
 
-                            }else{
+                            } else {
                                 followers.remove(myusername)
 
                             }
@@ -147,20 +146,15 @@ class ProfileViewerFragment : Fragment() {
                 val user = querySnapshot.documents.firstOrNull()?.toObject<User>()
 
                 user?.let {
-                    val followerCount = it.followers?.size ?: 0
-                    binding.followerCount.text = followerCount.toString()
-
                     val followingCount = it.following?.size ?: 0
                     binding.followingCount.text = followingCount.toString()
-
                     binding.postsCount.text = postList.size.toString()
-
                     binding.name.text = "${it.firstname} ${it.lastname}"
                 }
             }
     }
 
-    private fun showToast(message: String) {
+    fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }

@@ -170,22 +170,4 @@ class CreateFragment : Fragment() {
             .commitNow()
     }
 
-    private fun fetchUri(imageUri: Uri, storageRef: StorageReference, onSuccess: (String) -> Unit) {
-        val uniqueFilename = UUID.randomUUID().toString()
-        val uploadTask = storageRef.child("file/image/$uniqueFilename").putFile(imageUri)
-            .addOnSuccessListener { taskSnapshot ->
-                taskSnapshot.storage.downloadUrl
-                    .addOnSuccessListener { uri ->
-                        val downloadUrl = uri.toString()
-                        onSuccess(downloadUrl)
-                    }
-                    .addOnFailureListener {
-                        println("Failed to fetch URL for image: $imageUri")
-                    }
-            }
-            .addOnFailureListener {
-                println("Failed to upload file: $imageUri")
-            }
-    }
-
 }

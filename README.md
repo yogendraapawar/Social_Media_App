@@ -55,3 +55,8 @@ The Authentication.kt contains 3 fragments as following
 > [fragment_sign_up.xml](https://github.com/yogendra131994/Social_Media_App/blob/main/app/src/main/res/layout/fragment_sign_up.xml)  handled by [SignUpFragment.kt](https://github.com/yogendra131994/Social_Media_App/blob/main/app/src/main/java/com/example/myapplication/SignUpFragment.kt)
 > 
 > [fragment_sign_in.xml](https://github.com/yogendra131994/Social_Media_App/blob/main/app/src/main/res/layout/fragment_sign_in.xml) handled by [SignInFragment.kt](https://github.com/yogendra131994/Social_Media_App/blob/main/app/src/main/java/com/example/myapplication/SignInFragment.kt)
+
+# How I Implemented post upload
+
+Refer to the [demo video](https://github.com/yogendra131994/Social_Media_App/assets/87609565/d4d59a76-d9ae-427d-b9be-5a8ef6f89424) to see upload functionality
+![image](https://github.com/yogendra131994/Social_Media_App/assets/87609565/bd653ab3-5519-4a4f-a076-1a1434b42018)

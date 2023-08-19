@@ -31,17 +31,18 @@
                         android:layout_height="wrap_content"
 
                         android:orientation="vertical">
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            app:cardCornerRadius="100dp">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/profile_picture"
+                                android:layout_width="110sp"
+                                android:layout_height="110sp"
+                                android:layout_gravity="center"
                                 android:layout_margin="20dp"
-                                android:src="@drawable/ic_launcher_foreground" />
-                        </androidx.cardview.widget.CardView>
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_launcher_foreground"
+                                app:civ_border_color="@color/black"
+                                app:civ_border_width="2sp"/>
+
 
 
                         <TextView
@@ -50,9 +51,12 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="Name "
-                            android:textAlignment="center" />
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"/>
 
                         <TextView
+                            android:id="@+id/bio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -77,6 +81,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/black"
                                     android:text="100" />
 
                                 <TextView
@@ -98,6 +104,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/black"
                                     android:text="100" />
 
                                 <TextView
@@ -120,6 +128,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/black"
                                     android:text="100" />
 
                                 <TextView

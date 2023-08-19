@@ -18,7 +18,10 @@ import com.google.firebase.firestore.ktx.toObject
 
 class SearchFragment : Fragment() {
 
+    // Initialize the Firestore instance
     private val db = FirebaseFirestore.getInstance()
+
+    // Declare variables
     private lateinit var recyclerView: RecyclerView
     private lateinit var list: ArrayList<User>
     private lateinit var searchAdapter: SearchAdapter
@@ -27,14 +30,19 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout using the data binding
         val binding = FragmentSearchBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        // Initialize the RecyclerView
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        // Initialize the list and the adapter
         list = ArrayList()
         searchAdapter = SearchAdapter(list)
+
+        // Set up item click listener for the adapter
         searchAdapter.onItemClick = { user ->
             Toast.makeText(context, "Clicked ${user.firstname}", Toast.LENGTH_SHORT).show()
             val fragment = user.username?.let { ProfileViewerFragment.newInstance(it) }
@@ -45,15 +53,22 @@ class SearchFragment : Fragment() {
                     .commit()
             }
         }
+
+        // Attach the adapter to the RecyclerView
         recyclerView.adapter = searchAdapter
 
+        // Set up the query text listener for the SearchView
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                // Clear the list and perform search on query submission
+                list.clear()
                 query?.let { searchProcess(it.trim()) }
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
+                // Clear the list and perform search on query text change
+                list.clear()
                 searchProcess(newText.trim())
                 return true
             }
@@ -63,7 +78,9 @@ class SearchFragment : Fragment() {
     }
 
     private fun searchProcess(query: String) {
-        list.clear()
+        list.clear() // Clear the list before adding new search results
+
+        // Perform Firestore query
         db.collection("users")
             .whereGreaterThanOrEqualTo("searchByUsername", query)
             .whereLessThanOrEqualTo("searchByUsername", query + "\uf8ff")
@@ -72,12 +89,15 @@ class SearchFragment : Fragment() {
                 if (!querySnapshot.isEmpty) {
                     for (user in querySnapshot) {
                         val filteredUser = user.toObject<User>()
-                        list.add(filteredUser)
+                        if (!list.contains(filteredUser)) { // Avoid duplicates
+                            list.add(filteredUser)
+                        }
                     }
                 } else {
                     println("Not found")
+                    list.clear()
                 }
-                searchAdapter.notifyDataSetChanged()
+                searchAdapter.notifyDataSetChanged() // Update the adapter
             }
     }
 }

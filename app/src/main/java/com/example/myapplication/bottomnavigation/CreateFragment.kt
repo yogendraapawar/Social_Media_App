@@ -24,7 +24,6 @@ import com.google.android.gms.tasks.Tasks
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import java.util.UUID
 
 class CreateFragment : Fragment() {
@@ -75,12 +74,12 @@ class CreateFragment : Fragment() {
             val caption=binding.caption.text.toString()
             val tags=binding.tags.text.toString()
             val pref=requireActivity().getSharedPreferences("LOG_IN", Context.MODE_PRIVATE)
-            val input=pref.getString("emailOrUsername", "")
+            val username=pref.getString("emailOrUsername", "")
 
             uploadImagesToStorage(images){uploadedUrls->
                 val post = Post(
                     null,
-                    input,
+                    username,
                     caption,
                     uploadedUrls,  // Replace the images ArrayList with uploaded URLs
                     tags,
@@ -88,6 +87,8 @@ class CreateFragment : Fragment() {
                     null,
                     null
                 )
+
+
 
                 post.generatePostId() // Generate unique ID for the post
 
@@ -170,4 +171,9 @@ class CreateFragment : Fragment() {
             .commitNow()
     }
 
+
+
 }
+
+
+

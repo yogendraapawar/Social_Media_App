@@ -8,12 +8,15 @@
         android:layout_height="wrap_content"
         android:height="0dp"
         android:checkable="true"
-        android:clickable="true"
-        android:focusable="true"
+        android:clickable="false"
+        android:focusable="false"
         app:strokeColor="@color/black"
         android:padding="30dp"
         android:background="@color/design_default_color_primary">
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -24,18 +27,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="10dp">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/baseline_person_24"/>
+                android:layout_margin="5dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_person_24"
+                    app:civ_border_color="@color/black"
+                    app:civ_border_width="1sp"/>
                 
                 <TextView
                     android:id="@+id/username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="username"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="10dp"
                     android:layout_gravity="center"
                     />
 
@@ -45,30 +55,28 @@
                 android:id="@+id/post_view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
+                android:layout_marginVertical="5dp"
                 android:layout_gravity="center_horizontal"
-
                 />
 
             <LinearLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_margin="5dp">
             <ImageView
                 android:id="@+id/like_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/outline_circle_24"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginHorizontal="5dp"
                 />
                 <ImageView
                     android:id="@+id/comment_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/outline_mode_comment_24"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="15dp"
                     />
             </LinearLayout>
             <TextView
@@ -92,6 +100,11 @@
 
             </TextView>
 
+
         </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
 
     </com.google.android.material.card.MaterialCardView>

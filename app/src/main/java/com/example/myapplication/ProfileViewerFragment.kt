@@ -1,12 +1,15 @@
 import android.content.Context
 import android.os.Bundle
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.Schema.Post
 import com.example.myapplication.Schema.User
 import com.example.myapplication.adapters.PostAdapter
@@ -24,6 +27,7 @@ class ProfileViewerFragment : Fragment() {
     private val db: FirebaseFirestore = Firebase.firestore
     private lateinit var binding: FragmentProfileViewerBinding
     private lateinit var postList: ArrayList<Post>
+    private lateinit var followButton :Button
 
     companion object {
         private const val ARG_USERNAME = "username"
@@ -42,6 +46,7 @@ class ProfileViewerFragment : Fragment() {
     ): View? {
         binding = FragmentProfileViewerBinding.inflate(inflater, container, false)
         val view = binding.root
+        followButton=binding.followButton
         val pref = requireActivity().getSharedPreferences("LOG_IN", Context.MODE_PRIVATE)
         myusername = pref.getString("emailOrUsername", null).toString()
         postList = ArrayList()
@@ -53,7 +58,7 @@ class ProfileViewerFragment : Fragment() {
         targetUsername = arguments?.getString(ARG_USERNAME).toString()
 
         fetchData()
-        val followButton = binding.followButton
+
         followButton.setOnClickListener {
             db.collection("users")
                 .whereEqualTo("username", myusername)
@@ -98,10 +103,11 @@ class ProfileViewerFragment : Fragment() {
                             val followers = it.followers ?: ArrayList()
                             if (!followers.contains(myusername)) {
                                 followers.add(myusername)
+                                followButton.hint="Following"
 
                             } else {
                                 followers.remove(myusername)
-
+                                followButton.hint="Follow"
                             }
                             val updates = hashMapOf<String, Any?>("followers" to followers)
 
@@ -111,6 +117,7 @@ class ProfileViewerFragment : Fragment() {
                                 }
                                 .addOnFailureListener {
                                     showToast("Failed to follow $targetUsername")
+                                    followButton.hint="Follow"
                                 }
                         }
                     }
@@ -150,6 +157,17 @@ class ProfileViewerFragment : Fragment() {
                     binding.followingCount.text = followingCount.toString()
                     binding.postsCount.text = postList.size.toString()
                     binding.name.text = "${it.firstname} ${it.lastname}"
+                    binding.followerCount.text= (it.followers?.size?:0).toString()
+                    binding.bio.text=it.bio
+                    if(it.followers?.contains(myusername) == true){
+                        followButton.hint="Following"
+                    }
+                    if(it.profileurl?.isNotEmpty() == true){
+                        Glide.with(this)
+                            .load(it.profileurl)
+                            .into(binding.profilePicture)
+                    }
+
                 }
             }
     }

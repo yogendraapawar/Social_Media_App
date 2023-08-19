@@ -14,7 +14,7 @@ import com.example.myapplication.Schema.Post
 import com.example.myapplication.Schema.User
 import kotlinx.coroutines.NonDisposableHandle.parent
 
-class PostImageAdapter( val imageUri:ArrayList<String>):RecyclerView.Adapter<PostImageAdapter.PostImageViewHolder>() {
+class PostImageAdapter(private val imageUri:ArrayList<String>):RecyclerView.Adapter<PostImageAdapter.PostImageViewHolder>() {
     var onItemClick: (() -> Unit)? = null
 
     class PostImageViewHolder(view: View):RecyclerView.ViewHolder(view){
@@ -37,6 +37,5 @@ class PostImageAdapter( val imageUri:ArrayList<String>):RecyclerView.Adapter<Pos
             .load(imageUri[position])
             .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL)) // Optional: Cache the image
             .into(imageView)
-
     }
 }

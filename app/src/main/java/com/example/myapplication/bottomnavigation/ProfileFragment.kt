@@ -61,7 +61,6 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
     ): View? {
 
         val binding = ModalBottomSheetContentBinding.inflate(inflater, container, false)
-        val view=binding.root
         val pref = requireActivity().getSharedPreferences("LOG_IN", Context.MODE_PRIVATE)
         username = pref.getString("emailOrUsername", "").toString()
         progressBar=binding.progressBar

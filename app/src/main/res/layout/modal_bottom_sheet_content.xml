@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+
+        android:id="@+id/standard_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                android:text="Edit profile"
+                android:textAlignment="center"
+                android:textSize="25dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/edit_profile_picture"
+                android:layout_width="110sp"
+                android:layout_height="110sp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_foreground"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="2sp"
+                />
+
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:paddingHorizontal="100sp"
+                android:progress="0"
+                android:layout_height="wrap_content"
+                android:max="100"/>
+
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name" />
+
+            <EditText
+                android:id="@+id/edit_surname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Surname" />
+
+            <EditText
+                android:id="@+id/edit_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Update bio" />
+
+            <TextView
+                android:id="@+id/change_profile_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginVertical="15dp"
+                android:text="Change profile picture"
+                android:textColor="#0000FF" />
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:text="Save" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

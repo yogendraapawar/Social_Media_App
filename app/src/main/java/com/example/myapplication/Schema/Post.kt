@@ -8,7 +8,7 @@ class Post (
     var postId: String? = null,
     var username:String?=null,
     var caption:String?=null,
-    var imageUri:ArrayList<String>?=null,
+    var imageUrl:ArrayList<String>?=null,
     var tags: String?=null,
     var timestamp: Timestamp?=null,
     var likes:Int?=null,

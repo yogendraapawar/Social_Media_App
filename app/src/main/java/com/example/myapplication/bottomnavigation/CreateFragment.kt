@@ -107,10 +107,6 @@ class CreateFragment : Fragment() {
                         Log.w(TAG, "Error adding post", e)
                     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> dd8ec07ea54592348ee157759bdc981577771958
             }
 
 
@@ -175,9 +171,6 @@ class CreateFragment : Fragment() {
             .commitNow()
     }
 
-<<<<<<< HEAD
 
 }
-=======
-}
->>>>>>> dd8ec07ea54592348ee157759bdc981577771958
+

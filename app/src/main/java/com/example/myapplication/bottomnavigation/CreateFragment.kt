@@ -74,12 +74,12 @@ class CreateFragment : Fragment() {
             val caption=binding.caption.text.toString()
             val tags=binding.tags.text.toString()
             val pref=requireActivity().getSharedPreferences("LOG_IN", Context.MODE_PRIVATE)
-            val input=pref.getString("emailOrUsername", "")
+            val username=pref.getString("emailOrUsername", "")
 
             uploadImagesToStorage(images){uploadedUrls->
                 val post = Post(
                     null,
-                    input,
+                    username,
                     caption,
                     uploadedUrls,  // Replace the images ArrayList with uploaded URLs
                     tags,
@@ -87,6 +87,8 @@ class CreateFragment : Fragment() {
                     null,
                     null
                 )
+
+
 
                 post.generatePostId() // Generate unique ID for the post
 

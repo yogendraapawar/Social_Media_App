@@ -9,8 +9,8 @@ import android.widget.ImageView
 import com.example.myapplication.R
 
 
-class CarouselRVAdapter(private val carouselDataList: ArrayList<String>) :
-    RecyclerView.Adapter<CarouselRVAdapter.CarouselItemViewHolder>() {
+class SelectedImagesAdapter(private val carouselDataList: ArrayList<String>) :
+    RecyclerView.Adapter<SelectedImagesAdapter.CarouselItemViewHolder>() {
 
     private lateinit var mlistener: onItemClickListener
 
@@ -34,7 +34,7 @@ class CarouselRVAdapter(private val carouselDataList: ArrayList<String>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselItemViewHolder {
-        val viewHolder = LayoutInflater.from(parent.context).inflate(R.layout.item_carousel, parent, false)
+        val viewHolder = LayoutInflater.from(parent.context).inflate(R.layout.selected_image_preview, parent, false)
         return CarouselItemViewHolder(viewHolder, mlistener)
     }
 

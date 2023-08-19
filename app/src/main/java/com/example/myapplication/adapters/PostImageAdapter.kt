@@ -38,6 +38,5 @@ class PostImageAdapter( val imageUri:ArrayList<String>):RecyclerView.Adapter<Pos
             .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL)) // Optional: Cache the image
             .into(imageView)
 
-
     }
 }

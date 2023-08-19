@@ -2,10 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".bottomnavigation.CreateFragment"
-    android:id="@+id/frame">
+    tools:context=".bottomnavigation.CreateFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ProgressBar
@@ -14,15 +14,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="invisible"
-        android:backgroundTint="@color/black" />
+        android:backgroundTint="@color/black"
+        android:visibility="invisible" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainScreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
 
 
         <ScrollView
@@ -54,8 +52,7 @@
                         android:background="@color/purple_500"
                         android:textColor="@android:color/white"
                         app:titleTextColor="@color/white"
-                        tools:ignore="MissingConstraints"
-                        >
+                        tools:ignore="MissingConstraints">
 
                         <TextView
                             android:id="@+id/toolbar_textView"
@@ -69,43 +66,42 @@
                             android:id="@+id/submitPost"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/baseline_arrow_forward_24"
                             android:layout_gravity="right"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/baseline_arrow_forward_24" />
 
                     </androidx.appcompat.widget.Toolbar>
 
                 </com.google.android.material.appbar.AppBarLayout>
 
-                    <!-- Add your content here -->
+                <!-- Add your content here -->
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/view_pager"
-                    android:layout_width="280dp"
-                    android:layout_height="260dp"
-                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginVertical="10dp"
 
-                />
+                    />
 
-                    <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="15dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/caption"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="15dp"
-                        app:hintEnabled="false"
-                        app:boxStrokeWidth="0dp"
-                        app:boxStrokeWidthFocused="0dp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        android:hint="Write a caption" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/caption"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Write a caption"
-                            />
-
-                    </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
                 <View
@@ -115,29 +111,28 @@
                     android:background="?android:attr/listDivider" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="15dp"
                     android:layout_weight="2"
-                    app:hintEnabled="false"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="0dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tags"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Tags"
-                        />
+                        android:hint="Tags" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
 
 
             </LinearLayout>

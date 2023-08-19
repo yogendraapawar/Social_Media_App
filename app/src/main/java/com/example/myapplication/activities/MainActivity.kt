@@ -21,7 +21,7 @@ import com.example.myapplication.bottomnavigation.ExploreFragment
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     // Binding object to access views in layout
     private lateinit var binding: ActivityMainBinding
 
@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun pickImagesIntent() {
+    fun pickImagesIntent() {
         val intent = Intent().apply {
             type = "image/*"
             putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
